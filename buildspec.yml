@@ -2,8 +2,9 @@ version: 0.2
 
 env:
   variables:
-    AWS_REGION: us-east-1            # <-- Adjust region
-    ECR_REPOSITORY_NAME: demo-repo   # <-- Adjust to your ECR repo name
+    AWS_REGION: us-east-1                # Adjust region if different
+    AWS_ACCOUNT_ID: 910490057036         # <- IMPORTANT: Set your account ID
+    ECR_REPOSITORY_NAME: demo-repo       # <- Match your ECR repo
     IMAGE_TAG: latest
 
 phases:
@@ -23,7 +24,7 @@ phases:
       - echo Pushing image to ECR...
       - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY_NAME:$IMAGE_TAG
       - echo Writing image definitions file for ECS deploy...
-      - printf '[{"name":"my-container","imageUri":"%s"}]' $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY_NAME:$IMAGE_TAG > imagedefinitions.json
+      - printf '[{"name":"demo-repo","imageUri":"%s"}]' $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY_NAME:$IMAGE_TAG > imagedefinitions.json
 
 artifacts:
   files:
