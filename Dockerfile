@@ -14,7 +14,7 @@ RUN npm run build
 RUN ls -la /app/dist
 
 # STAGE 2: Run the app with Nginx
-FROM nginx:1.25.5-alpine
+FROM nginx:1.26.3-alpine
 
 # Replace default Nginx config with your custom one
 COPY nginx.conf /etc/nginx/nginx.conf
